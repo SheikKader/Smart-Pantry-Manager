@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.SmartPantryManager" parent="Theme.Material3.DayNight">
+
+        <item name="colorPrimary">@color/primary</item>
+        <item name="android:statusBarColor">@color/primary_dark</item>
+
+    </style>
+
+    <style name="Theme.SmartPantryManager" parent="Base.Theme.SmartPantryManager" />
+</resources>
