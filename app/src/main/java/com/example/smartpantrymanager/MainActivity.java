@@ -1,27 +1,53 @@
 package com.example.smartpantrymanager;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
     private PantryDb dbHelper;
     private PantryAdapter adapter;
     private RecyclerView recyclerView;
+    private FloatingActionButton fabAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         recyclerView = findViewById(R.id.recyclerViewPantry);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        fabAdd = findViewById(R.id.fabAddIngredient);
+
         dbHelper = new PantryDb(this);
         Cursor cursor = dbHelper.getInventory();
+
         adapter = new PantryAdapter(this, cursor);
         recyclerView.setAdapter(adapter);
+
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddIngredientActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (dbHelper != null && adapter != null) {
+            Cursor newCursor = dbHelper.getInventory();
+            adapter.swapCursor(newCursor);
+        }
     }
 
     @Override
