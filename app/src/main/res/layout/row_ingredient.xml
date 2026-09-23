@@ -7,9 +7,9 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="8dp"
-    app:cardBackgroundColor="?attr/colorSurfaceVariant"
+    app:cardBackgroundColor="@color/card_bg"
     app:cardCornerRadius="12dp"
-    app:cardElevation="2dp">
+    app:cardElevation="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,9 +21,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Ingredient"
-            android:textSize="22sp"
+            android:textSize="25sp"
             android:textStyle="bold"
-            android:textColor="?attr/colorOnSurface" />
+            android:layout_alignParentStart="true"
+            android:textColor="@color/text_primary" />
 
         <TextView
             android:id="@+id/tvIngredientQuantity"
@@ -31,21 +32,30 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvIngredientName"
             tools:text="2.0 cups"
-            android:textSize="16sp"
-            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="18sp"
+            android:textColor="@color/text_secondary"
             android:layout_marginTop="4dp"/>
+
+        <ImageView
+            android:id="@+id/btnDeleteIngredient"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:src="@android:drawable/ic_menu_delete"
+            app:tint="#D32F2F" />
 
         <TextView
             android:id="@+id/tvIngredientExpiry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
+            android:layout_toStartOf="@id/btnDeleteIngredient"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="12dp"
             tools:text="Exp: 12/10/2026"
             android:textSize="14sp"
-            android:textColor="?attr/colorOnSurfaceVariant"/>
+            android:textColor="@color/text_secondary"/>
 
     </RelativeLayout>
-
 </com.google.android.material.card.MaterialCardView>

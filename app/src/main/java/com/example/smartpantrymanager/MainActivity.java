@@ -12,7 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MainActivity extends AppCompatActivity {
 
     private PantryDb dbHelper;
-    private PantryAdapter adapter;
+    public PantryAdapter adapter;
     private RecyclerView recyclerView;
     private FloatingActionButton fabAdd;
 
