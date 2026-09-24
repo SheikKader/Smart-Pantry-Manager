@@ -1,6 +1,7 @@
 package com.example.smartpantrymanager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,19 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.Ingredient
         } else {
             holder.expiryLabel.setText("");
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, EditIngredientActivity.class);
+                intent.putExtra("ID", id);
+                intent.putExtra("NAME", name);
+                intent.putExtra("QUANTITY", qty);
+                intent.putExtra("UNIT", unit);
+                intent.putExtra("EXPIRY", exp);
+                context.startActivity(intent);
+            }
+        });
 
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
