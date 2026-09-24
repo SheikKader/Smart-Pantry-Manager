@@ -18,11 +18,20 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnViewRecipes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvPantryTitle"
+        android:layout_marginBottom="16dp"
+        android:text="Available Recipes"
+        app:cornerRadius="8dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewPantry"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tvPantryTitle"
+        android:layout_below="@id/btnViewRecipes"
         android:scrollbars="vertical"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

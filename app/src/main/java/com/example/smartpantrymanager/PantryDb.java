@@ -211,6 +211,11 @@ public class PantryDb extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM pantry_stock", null);
     }
 
+    public Cursor getRecipes() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM recipes", null);
+    }
+
     public boolean updateIngredient(int id, String name, double quantity, String unit, String expiryDate) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

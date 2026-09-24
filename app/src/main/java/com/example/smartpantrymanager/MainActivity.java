@@ -7,6 +7,8 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,13 +27,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         fabAdd = findViewById(R.id.fabAddIngredient);
-
-        dbHelper = new PantryDb(this);
-        Cursor cursor = dbHelper.getInventory();
-
-        adapter = new PantryAdapter(this, cursor);
-        recyclerView.setAdapter(adapter);
-
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,6 +34,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        MaterialButton btnViewRecipes = findViewById(R.id.btnViewRecipes);
+        btnViewRecipes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RecipesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        dbHelper = new PantryDb(this);
+        Cursor cursor = dbHelper.getInventory();
+        adapter = new PantryAdapter(this, cursor);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
