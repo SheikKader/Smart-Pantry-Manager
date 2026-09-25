@@ -268,6 +268,15 @@ public class PantryDb extends SQLiteOpenHelper {
 
         return db.rawQuery("SELECT * FROM recipes WHERE id IN (" + validIds.toString() + ")", null);
     }
+    public Cursor getRecipeById(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM recipes WHERE id = ?", new String[]{String.valueOf(id)});
+    }
+
+    public Cursor getRecipeIngredients(int recipeId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM recipe_ingredients WHERE recipe_id = ?", new String[]{String.valueOf(recipeId)});
+    }
 
     public boolean updateIngredient(int id, String name, double quantity, String unit, String expiryDate) {
         SQLiteDatabase db = this.getWritableDatabase();

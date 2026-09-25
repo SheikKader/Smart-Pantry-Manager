@@ -1,5 +1,7 @@
 package com.example.smartpantrymanager;
+
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHolder> {
     private Context context;
     private Cursor cursor;
+
     public RecipeAdapter(Context context, Cursor cursor) {
         this.context = context;
         this.cursor = cursor;
@@ -31,9 +34,18 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 
         String name = cursor.getString(cursor.getColumnIndexOrThrow("recipe_name"));
         String instructions = cursor.getString(cursor.getColumnIndexOrThrow("instructions"));
+        int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
 
         holder.nameLabel.setText(name);
         holder.instructionsLabel.setText(instructions);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, RecipeDetailActivity.class);
+                intent.putExtra("RECIPE_ID", id);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
