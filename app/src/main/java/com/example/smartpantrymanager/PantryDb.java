@@ -216,6 +216,59 @@ public class PantryDb extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM recipes", null);
     }
 
+    public Cursor getAvailableRecipes() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor allRecipes = db.rawQuery("SELECT * FROM recipes", null);
+        StringBuilder validIds = new StringBuilder();
+
+        while (allRecipes.moveToNext()) {
+            int recipeId = allRecipes.getInt(allRecipes.getColumnIndexOrThrow("id"));
+
+            Cursor reqs = db.rawQuery("SELECT * FROM recipe_ingredients WHERE recipe_id = ?",
+                    new String[]{String.valueOf(recipeId)});
+
+            boolean canCook = true;
+
+            while (reqs.moveToNext()) {
+                String reqName = reqs.getString(reqs.getColumnIndexOrThrow("ingredient_name"));
+                double reqQty = reqs.getDouble(reqs.getColumnIndexOrThrow("required_quantity"));
+
+                Cursor pantryCheck = db.rawQuery("SELECT * FROM pantry_stock WHERE name = ? COLLATE NOCASE",
+                        new String[]{reqName});
+
+                if (pantryCheck.moveToFirst()) {
+                    double pantryQty = pantryCheck.getDouble(pantryCheck.getColumnIndexOrThrow("quantity"));
+                    if (pantryQty < reqQty) {
+                        canCook = false;
+                    }
+                } else {
+                    canCook = false;
+                }
+                pantryCheck.close();
+
+                if (!canCook) {
+                    break;
+                }
+            }
+            reqs.close();
+
+            if (canCook) {
+                if (validIds.length() > 0) {
+                    validIds.append(",");
+                }
+                validIds.append(recipeId);
+            }
+        }
+        allRecipes.close();
+
+        if (validIds.length() == 0) {
+            return db.rawQuery("SELECT * FROM recipes WHERE id = -1", null);
+        }
+
+        return db.rawQuery("SELECT * FROM recipes WHERE id IN (" + validIds.toString() + ")", null);
+    }
+
     public boolean updateIngredient(int id, String name, double quantity, String unit, String expiryDate) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

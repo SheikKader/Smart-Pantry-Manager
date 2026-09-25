@@ -1,4 +1,5 @@
 package com.example.smartpantrymanager;
+
 import android.database.Cursor;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +22,7 @@ public class RecipesActivity extends AppCompatActivity {
         rView.setLayoutManager(new LinearLayoutManager(this));
 
         dbHelper = new PantryDb(this);
-        cursor = dbHelper.getRecipes();
+        cursor = dbHelper.getAvailableRecipes();
 
         adapter = new RecipeAdapter(this, cursor);
         rView.setAdapter(adapter);
