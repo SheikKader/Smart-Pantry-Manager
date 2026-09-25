@@ -19,31 +19,37 @@
         android:layout_marginBottom="16dp"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnViewRecipes"
+        android:id="@+id/btnAddIngredient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvPantryTitle"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Add Ingredient"
+        app:cornerRadius="8dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnViewRecipes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnAddIngredient"
+        android:layout_marginBottom="8dp"
         android:text="Available Recipes"
+        app:cornerRadius="8dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnViewRecipes"
+        android:layout_marginBottom="16dp"
+        android:text="Settings"
         app:cornerRadius="8dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewPantry"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/btnViewRecipes"
+        android:layout_below="@id/btnSettings"
         android:scrollbars="vertical"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddIngredient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="16dp"
-        android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="?attr/colorPrimary"
-        app:tint="?attr/colorOnPrimary"
-        android:contentDescription="Add Ingredient" />
 
 </RelativeLayout>

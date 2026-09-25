@@ -25,9 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewPantry);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        fabAdd = findViewById(R.id.fabAddIngredient);
-        fabAdd.setOnClickListener(new View.OnClickListener() {
+        MaterialButton btnAddIngredient = findViewById(R.id.btnAddIngredient);
+        btnAddIngredient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddIngredientActivity.class);
@@ -40,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RecipesActivity.class);
+                startActivity(intent);
+            }
+        });
+        MaterialButton btnSettings = findViewById(R.id.btnSettings);
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(intent);
             }
         });
