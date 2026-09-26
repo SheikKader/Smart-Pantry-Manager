@@ -2,6 +2,8 @@ package com.example.smartpantrymanager;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +14,7 @@ public class RecipesActivity extends AppCompatActivity {
     private RecipeAdapter adapter;
     private PantryDb dbHelper;
     private Cursor cursor;
+    private TextView tvEmptyState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +22,8 @@ public class RecipesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipes);
 
         rView = findViewById(R.id.rvRecipes);
+        tvEmptyState = findViewById(R.id.tvEmptyState);
+
         rView.setLayoutManager(new LinearLayoutManager(this));
 
         dbHelper = new PantryDb(this);
@@ -26,6 +31,13 @@ public class RecipesActivity extends AppCompatActivity {
 
         adapter = new RecipeAdapter(this, cursor);
         rView.setAdapter(adapter);
+        if (cursor != null && cursor.getCount() > 0) {
+            rView.setVisibility(View.VISIBLE);
+            tvEmptyState.setVisibility(View.GONE);
+        } else {
+            rView.setVisibility(View.GONE);
+            tvEmptyState.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
